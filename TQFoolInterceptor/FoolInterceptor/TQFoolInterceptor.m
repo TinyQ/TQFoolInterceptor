@@ -18,6 +18,9 @@
         
         [[self class] handleFoolClassName:@"__NSPlaceholderArray" method:@selector(initWithObjects:count:)];
         [[self class] handleFoolClassName:@"__NSArrayI" method:@selector(objectAtIndex:)];
+        [[self class] handleFoolClassName:@"__NSArrayM" method:@selector(insertObject:atIndex:)];
+        [[self class] handleFoolClassName:@"__NSPlaceholderDictionary" method:@selector(initWithObjects:forKeys:count:)];
+        
         
     });
 }
@@ -36,7 +39,7 @@
     [[self class] swizzleForClass:class method:origSel withMethod:altSel error:&error];
     
     if (error) {
-        NSLog(@"%@",error);
+        NSLog(@"%@",error); //TODO:
     }
 }
 
@@ -90,5 +93,39 @@
     return [self fool_objectAtIndex:index];
 }
 
+@end
+
+#pragma mark - NSMutableArray FoolInterceptor
+
+@implementation NSMutableArray(FoolInterceptor)
+
+- (void)fool_insertObject:(id)anObject atIndex:(NSUInteger)index;
+{
+    if (anObject == nil)
+    {
+        return;
+    }
+    
+    [self fool_insertObject:anObject atIndex:index];
+}
+
+@end
+
+#pragma mark - NSDictionary FoolInterceptor
+
+@implementation NSDictionary(FoolInterceptor)
+
+- (instancetype)fool_initWithObjects:(const id [])objects forKeys:(const id <NSCopying> [])keys count:(NSUInteger)cnt
+{
+    for (int i = 0; i<cnt; i++)
+    {
+        if(objects[i] == nil || keys[i] == nil)
+        {
+            return [NSDictionary dictionary];
+        }
+    }
+    
+    return [self fool_initWithObjects:objects forKeys:keys count:cnt];
+}
 
 @end

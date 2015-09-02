@@ -37,6 +37,8 @@
     }];
 }
 
+#pragma mark test NSArray
+
 - (void)test_fool_initWithObjects_count
 {
     id value = nil;
@@ -56,6 +58,34 @@
     id value = [array objectAtIndex:2];
     
     if (value == nil)
+    {
+        XCTAssert(YES, @"Pass");
+    }
+}
+
+#pragma mark test NSMutableArray
+
+- (void)test_fool_insertObject_atIndex
+{
+    NSMutableArray *array = [NSMutableArray array];
+    
+    id value = nil;
+    
+    [array addObject:value];
+    
+    if (array)
+    {
+        XCTAssert(YES, @"Pass");
+    }
+}
+
+- (void)test_d
+{
+    id value = nil;
+    
+    NSDictionary *dic = @{@"key":value};
+    
+    if (dic)
     {
         XCTAssert(YES, @"Pass");
     }
