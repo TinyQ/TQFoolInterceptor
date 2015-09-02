@@ -17,6 +17,7 @@
     dispatch_once(&onceToken, ^{
         
         [[self class] handleFoolClassName:@"__NSPlaceholderArray" method:@selector(initWithObjects:count:)];
+        [[self class] handleFoolClassName:@"__NSArrayI" method:@selector(objectAtIndex:)];
         
     });
 }
@@ -78,5 +79,16 @@
     
     return [self fool_initWithObjects:objects count:cnt];
 }
+
+- (id)fool_objectAtIndex:(NSUInteger)index
+{
+    if (index >= self.count)
+    {
+        return nil;
+    }
+    
+    return [self fool_objectAtIndex:index];
+}
+
 
 @end

@@ -49,4 +49,16 @@
     }
 }
 
+- (void)test_fool_objectAtIndex
+{
+    NSArray *array = @[@"1",@"2"];
+    
+    id value = [array objectAtIndex:2];
+    
+    if (value == nil)
+    {
+        XCTAssert(YES, @"Pass");
+    }
+}
+
 @end
