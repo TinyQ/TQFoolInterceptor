@@ -20,7 +20,7 @@
         [[self class] handleFoolClassName:@"__NSArrayI" method:@selector(objectAtIndex:)];
         [[self class] handleFoolClassName:@"__NSArrayM" method:@selector(insertObject:atIndex:)];
         [[self class] handleFoolClassName:@"__NSPlaceholderDictionary" method:@selector(initWithObjects:forKeys:count:)];
-        
+        [[self class] handleFoolClassName:@"__NSDictionaryM" method:@selector(setObject:forKey:)];
         
     });
 }
@@ -66,7 +66,7 @@
 
 @end
 
-#pragma mark - NSArray FoolInterceptor
+#pragma mark - NSArray
 
 @implementation NSArray(FoolInterceptor)
 
@@ -95,7 +95,7 @@
 
 @end
 
-#pragma mark - NSMutableArray FoolInterceptor
+#pragma mark - NSMutableArray
 
 @implementation NSMutableArray(FoolInterceptor)
 
@@ -111,7 +111,7 @@
 
 @end
 
-#pragma mark - NSDictionary FoolInterceptor
+#pragma mark - NSDictionary
 
 @implementation NSDictionary(FoolInterceptor)
 
@@ -126,6 +126,22 @@
     }
     
     return [self fool_initWithObjects:objects forKeys:keys count:cnt];
+}
+
+@end
+
+#pragma mark - NSMutableDictionary
+
+@implementation NSMutableDictionary(FoolInterceptor)
+
+- (void)fool_setObject:(id)anObject forKey:(id <NSCopying>)aKey
+{
+    if (anObject == nil || aKey == nil)
+    {
+        return;
+    }
+    
+    [self fool_setObject:anObject forKey:aKey];
 }
 
 @end
