@@ -72,25 +72,30 @@
 
 - (instancetype)fool_initWithObjects:(const id [])objects count:(NSUInteger)cnt
 {
-    for (int i = 0; i<cnt; i++)
-    {
-        if(objects[i] == nil)
-        {
-            return [NSArray array];
-        }
+    id value = nil;
+    
+    @try {
+        value = [self fool_initWithObjects:objects count:cnt];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"TQFoolInterceptor receive exception : %@",exception);
     }
     
-    return [self fool_initWithObjects:objects count:cnt];
+    return value;
 }
 
 - (id)fool_objectAtIndex:(NSUInteger)index
 {
-    if (index >= self.count)
-    {
-        return nil;
+    id value = nil;
+    
+    @try {
+        value = [self fool_objectAtIndex:index];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"TQFoolInterceptor receive exception : %@",exception);
     }
     
-    return [self fool_objectAtIndex:index];
+    return value;
 }
 
 @end
@@ -101,12 +106,12 @@
 
 - (void)fool_insertObject:(id)anObject atIndex:(NSUInteger)index;
 {
-    if (anObject == nil)
-    {
-        return;
+    @try {
+        [self fool_insertObject:anObject atIndex:index];
     }
-    
-    [self fool_insertObject:anObject atIndex:index];
+    @catch (NSException *exception) {
+        NSLog(@"TQFoolInterceptor receive exception : %@",exception);
+    }
 }
 
 @end
@@ -117,15 +122,16 @@
 
 - (instancetype)fool_initWithObjects:(const id [])objects forKeys:(const id <NSCopying> [])keys count:(NSUInteger)cnt
 {
-    for (int i = 0; i<cnt; i++)
-    {
-        if(objects[i] == nil || keys[i] == nil)
-        {
-            return [NSDictionary dictionary];
-        }
+    id value = nil;
+    
+    @try {
+        value = [self fool_initWithObjects:objects forKeys:keys count:cnt];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"TQFoolInterceptor receive exception : %@",exception);
     }
     
-    return [self fool_initWithObjects:objects forKeys:keys count:cnt];
+    return value;
 }
 
 @end
@@ -136,12 +142,12 @@
 
 - (void)fool_setObject:(id)anObject forKey:(id <NSCopying>)aKey
 {
-    if (anObject == nil || aKey == nil)
-    {
-        return;
+    @try {
+        [self fool_setObject:anObject forKey:aKey];
     }
-    
-    [self fool_setObject:anObject forKey:aKey];
+    @catch (NSException *exception) {
+        NSLog(@"TQFoolInterceptor receive exception : %@",exception);
+    }
 }
 
 @end

@@ -44,10 +44,6 @@
     id value = nil;
     
     NSArray *array = @[@"1",value];
-    
-    if (array && array.count == 0){
-        XCTAssert(YES, @"Pass");
-    }
 }
 
 - (void)test_fool_objectAtIndex
@@ -55,10 +51,6 @@
     NSArray *array = @[@"1",@"2"];
     
     id value = [array objectAtIndex:2];
-    
-    if (value == nil){
-        XCTAssert(YES, @"Pass");
-    }
 }
 
 #pragma mark test NSMutableArray
@@ -70,10 +62,6 @@
     id value = nil;
     
     [array addObject:value];
-    
-    if (array){
-        XCTAssert(YES, @"Pass");
-    }
 }
 
 #pragma mark test NSDictionary
@@ -84,15 +72,7 @@
     
     NSDictionary *dic = @{@"key":value};
     
-    if (dic){
-        XCTAssert(YES, @"Pass");
-    }
-    
     dic = @{value:@"value"};
-    
-    if (dic){
-        XCTAssert(YES, @"Pass");
-    }
 }
 
 #pragma mark test NSMutableDictionary
@@ -105,15 +85,9 @@
     
     [dic setObject:obj forKey:@"key"];
     
-    if (dic) {
-        XCTAssert(YES, @"Pass");
-    }
     
     [dic setObject:@"" forKey:obj];
-    
-    if (dic) {
-        XCTAssert(YES, @"Pass");
-    }
+
 }
 
 @end
